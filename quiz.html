@@ -1,0 +1,305 @@
+<html>
+<head>
+<meta name="viewport"content="width=device-width">
+<style type="text/css">
+body{
+background:silver;
+}
+.setout{
+height:200px;
+width:300px;
+color:cyan;
+background:linear-gradient(315deg,blue,black,purple);
+box-shadow:5px 5px grey;
+border-radius:2rem;
+}
+.set{
+background:blue;
+color:white;
+border-radius:2rem;
+}
+.main1{
+height:80%;
+width:100%;
+display:grid;
+justify-content:center;
+align-content:center;
+margin:0;
+padding:0;
+box-sizing:border-box;
+background:cyan;
+border-radius:20px;
+border:3px solid red;
+}
+.innerdiv{
+height:300px;
+width:300px;
+color:cyan;
+background:linear-gradient(315deg,blue,black,purple);
+box-shadow:5px 5px grey;
+border-radius:2rem;
+}
+ul{
+list-style-type:none;
+padding-top:1rem;
+}
+li{
+padding-top:10px;
+width:100%;
+}
+#submit{
+height:40px;
+width:100px;
+display:block;
+margin:auto;
+border:none;
+background:violet;
+}
+#showscore{
+background:grey;
+margin-top:10px;
+padding:20px;
+height:100px;
+width:270px;
+margin:auto;
+}
+.result{
+display:none;
+}
+.qns{
+padding-top:20px;
+padding-left:30px;
+}
+#demo{
+height:100px;
+width:100px;
+background:violet;
+display:grid;
+justify-content:center;
+align-content:center;
+margin:auto;
+border-radius:50%;
+box-shadow:2px 2px;
+}
+.rule{
+background:gold;
+border-radius:2rem;
+position:absolute;
+height:200px;
+width:200px;
+display:none;
+}
+</style>
+</head>
+<body>
+<div class="rule">
+<ul><u>Rules
+<li>1.You should submit your answer within 130 second</li>
+<li>2.You will get 1 point for one currect answer</li>
+<li>3.If you choose incorrect answer then your point will not be decrease</li>
+<li>4.All the questions are related to web programming</u></li>
+</ul>
+</div>
+
+<div class="main1"id="main">
+<div id="demo">
+</div>
+<div class="innerdiv">
+<div class="qns">questiin will come here</div>
+<ul>
+<li><input type="radio"name="radio"id="ans1"class="answers">
+<label for="ans1"id="option1">answer option</label></li>
+<li><input type="radio"name="radio"id="ans2"class="answers">
+<label for="ans2"id="option2">answer option</label></li>
+<li><input type="radio"name="radio"id="ans3"class="answers">
+<label for="ans3"id="option3">answer option</label></li>
+<li><input type="radio"name="radio"id="ans4"class="answers">
+<label for="ans4"id="option4">answer option</label></li>
+</ul>
+<button id="submit">submit</button>
+<div id="showScore"class="result"></div>
+</div>
+</div>
+<script type="text/javascript">
+function a(){
+let ttime=75;
+let min=0;
+let sec=0;
+let counter=0;
+let b=document.getElementById("demo");
+let c=setInterval(function (){
+counter++;
+min=Math.floor((ttime-counter)/60);
+sec=ttime-min*60-counter;
+b.innerHTML=`time left:${min}:${sec} `;
+if(counter==ttime){
+clearInterval(c);
+}
+},1000);
+}
+a();
+const qns=[
+{
+question:"q1:full form of html",
+a:"happy to markup language",
+b:"happy to makin language",
+c:"happy the machine language",
+d:"hypertext markup language",
+ans:"ans4",
+correct:"hypertext markup language"
+},
+{
+question:"q2:full form of dbms",
+a:"database messenger",
+b:"database management system",
+c:"database message standard",
+d:"hypertext markup language",
+ans:"ans2",
+correct:"database management system"
+},
+{
+question:"q3:who is the father of computer",
+a:"charles babbage",
+b:"einstien",
+c:"lady augusta",
+d:"blaise pascal",
+ans:"ans1",
+correct:"charles babbage"
+},
+{
+question:"q4:full form of ic",
+a:"integrated chip",
+b:"international chip",
+c:"integrated circuit",
+d:"international character chip",
+ans:"ans3",
+correct:"integrated circuit"
+},
+{
+question:"q5:which word is the alternative of object",
+a:"this",
+b:"that",
+c:"this.",
+d:"that.",
+ans:"ans1",
+correct:"this"
+},
+{
+question:"q6:how u declare a fat arrow function in js",
+a:"function (){ }",
+b:"function name(){ }",
+c:"function name=(){ }",
+d:"function name=()=>{ }",
+ans:"ans4",
+correct:"function name=()=>{ }"
+},
+{
+question:"q7:how many ways you declare variables in js",
+a:"1",
+b:"2",
+c:"3",
+d:"4",
+ans:"ans3",
+correct:"3"
+},
+{
+question:"q8:how you declare variable in js",
+a:"var variable_name",
+b:"let variable_name",
+c:"const variable_name",
+d:"all above",
+ans:"ans4",
+correct:"all above"
+},
+
+{
+question:"q9:how you find power of number in js without using mathif number is'a'",
+a:"pow(a)",
+b:"a***a",
+c:"non of above",
+d:"1 and 2",
+ans:"ans2",
+correct:"a***a"
+},
+
+{
+question:"q10:how you insert external js file in html",
+a:"script type='javascript name=a.js'",
+b:"src='a.js'",
+c:"script src='a.js'",
+d:"all above",
+ans:"ans3",
+correct:"<script src='a.js'>"
+}
+];
+const showscore=document.querySelector("#showScore");
+const next=document.querySelector('#next');
+const question=document.querySelector('.qns');
+const option1=document.querySelector('#option1');
+const option2=document.querySelector('#option2');
+const option3=document.querySelector('#option3');
+const option4=document.querySelector('#option4');
+const submit=document.querySelector('#submit');
+const answers=document.querySelectorAll('.answers');
+const ans=document.querySelector('#ans4');
+var qnscount=0;
+var anscount=0;
+const qnsload=()=>{
+let a=qns[qnscount];
+question.innerHTML=a.question;
+option1.innerHTML=a.a;
+option2.innerHTML=a.b;
+option3.innerHTML=a.c;
+option4.innerHTML=a.d;
+}
+qnsload();
+const getchkans=()=>{
+let answer;
+answers.forEach((currelement)=>{
+if(currelement.checked){
+answer=currelement.id;
+}
+})
+return(answer);
+}
+function deselect(){
+answers.forEach(function (ele){
+ele.checked=false;
+})
+}
+submit.addEventListener("click",()=>{
+const chkans=getchkans();
+if(qns[qnscount].ans==chkans){
+anscount++;
+}
+if(qns[qnscount].ans!=chkans){
+alert("correct answer:\n"+(qns[qnscount].correct).toUpperCase());
+}
+deselect();
+qnscount++;
+if(qnscount<qns.length){
+qnsload();
+}
+else{
+showscore.innerHTML=`
+<h3>Your score is ${anscount}/${qnscount}</h3>
+<button onclick="location.reload();">PlayAgain</button>
+`;
+showscore.classList.remove("result");
+}
+})
+
+ setTimeout(function (){
+ document.write(
+`<div style="background:blue;height:200px;width:300px;">
+<h3 style="color:cyan">your time off</h3>
+<button onclick="location.reload()"class="set" style="border-radius:2rem;background:violet;height:50px;width:100px;">PlayAgain</button>
+</div>`)
+},75000);
+function rule(){
+showscore.classList.remove("rule");
+showscore.classList.remove("main");
+}
+</script>
+</body>
+</html>
